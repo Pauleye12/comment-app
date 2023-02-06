@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    padding: 0;
+    color: hsl(211, 10%, 45%);
+    font-family: "Rubik", sans-serif;
+  }
+}
