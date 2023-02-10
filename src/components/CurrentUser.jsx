@@ -31,7 +31,10 @@ function CurrentUser(props) {
         cols="50"
         rows="3"
       ></textarea>
-      <button className="bg-[#5357b8] text-white p-[10px] px-[16px] rounded-lg " onClick={save}>
+      <button
+        className="bg-[#5357b8] text-white p-[10px] px-[16px] rounded-lg hover:opacity-[0.5] transition-all ease-in-out duration-[.45s] "
+        onClick={save}
+      >
         SEND
       </button>
     </form>
