@@ -20,7 +20,11 @@ function CurrentUser(props) {
     setText("");
   };
 
-  return <Form onSubmit={save} buttonText="SEND" />;
+  return (
+    <div className=" fixed bottom-0 left-0 w-full ">
+      <Form onSubmit={save} buttonText="SEND" />
+    </div>
+  );
 }
 
 export default CurrentUser;
