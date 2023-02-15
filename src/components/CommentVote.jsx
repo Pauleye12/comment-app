@@ -2,7 +2,7 @@ import React from "react";
 
 function CommentVote({ id, score, voteComment, nestedCommentId }) {
   return (
-    <div className="flex flex-col justify-center items-center gap-[15px] p-[10px] bg-Very-light-gray rounded-[10px] translate-y-[17px] ">
+    <div className="  flex md:flex-col justify-center items-center gap-[15px] p-[10px] bg-Very-light-gray rounded-[10px] md:translate-y-[17px] ">
       <button
         className="hover: text-[#5357b8] transition-all ease-in-out duration-[.45s] "
         onClick={voteComment(id, "inc", nestedCommentId)}

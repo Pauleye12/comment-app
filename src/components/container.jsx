@@ -31,7 +31,6 @@ function Container() {
   //   [key]:12
   // }
 
-
   // console.log(person[key])
 
   // const [formDate, setformDate] = useState({
@@ -44,7 +43,7 @@ function Container() {
   // const onChange = (field) => (e) => {
   // setformDate((prev)=> ({...prev, [field]:e.target.value}))
   // }
-  
+
   // onChange('firstName')
   // onChange('lastName')
 
@@ -77,14 +76,63 @@ function Container() {
     [info]
   );
 
+  // const deleteComment = useCallback((id, nestedCommentId) => () => {
+  //    const updatedComments = info.map((comment) => {
+  //      if (comment.id === id) {
+  //        if (nestedCommentId) {
+  //          const nestedComment = comment.replies.filter((_comment) => (_comment.id !== id))
+  //          return nestedComment
+
+  //        } else {
+  //          const updatedComments = info.filter((comment) => comment.id !== id);
+  //         }
+  //       } else {
+  //         return comment
+  //       }
+  //     })
+
+  //     // const updatedComments = info.filter((comment) => comment.id !== id);
+  //     // return updatedComments
+
+  //   setInfo(updatedComments)
+  // }, [info])
+
+  const deleteComment =
+    (id, nestedCommentId) => () => {
+      if (nestedCommentId) {
+        const updated_Comments = info.map((comment) => {
+          
+          if (comment.id == id) {
+            comment.replies = comment.replies.filter(
+              (_comment) => _comment.id !== nestedCommentId
+            );
+            return comment
+          } else {
+            return comment
+          }
+          
+        });
+        setInfo(updated_Comments);
+      }
+      
+      else {
+        const updated_Comments = info.filter((comment) => comment.id !== id);
+        setInfo(updated_Comments);
+      }
+
+      // const updatedComments = info.filter((comment) => comment.id !== id);
+      // return updatedComments
+    };
+
   return (
-    <div className="flex flex-col justify-center items-start gap-[20px] max-w-[800px] ">
+    <div className="flex flex-col justify-center items-start gap-[20px] w-full max-w-[800px] ">
       {info.map((comment, index) => (
         <CommentBox
           key={index}
           values={comment}
           update={setInfo}
           voteComment={voteComment}
+          deleteComment={deleteComment}
         />
       ))}
       <CurrentUser update={setInfo} />
