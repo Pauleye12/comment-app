@@ -68,7 +68,7 @@ function CommentBox({ values, update, voteComment, deleteComment }) {
   // };
 
   return (
-    <div className="w-full">
+    <div className="w-full ">
       <div className="flex flex-col md:flex-row md:gap-[30px] gap-[4px] justify-start items-start px-[14px] py-[15px]  w-full bg-white rounded-[12px] ">
         {/* voting component for first level comment */}
         <div className="order-last md:order-first flex justify-between items-center max-md:w-full ">

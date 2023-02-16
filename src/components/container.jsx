@@ -125,7 +125,7 @@ function Container() {
     };
 
   return (
-    <div className="flex flex-col justify-center items-start gap-[20px] w-full max-w-[800px] ">
+    <div className="flex flex-col justify-center items-start gap-[20px] w-full max-w-[800px] mb-[190px] md:mb-[80px] ">
       {info.map((comment, index) => (
         <CommentBox
           key={index}
