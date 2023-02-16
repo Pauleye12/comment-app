@@ -21,7 +21,7 @@ function CurrentUser(props) {
   };
 
   return (
-    <div className=" fixed bottom-0 left-0 w-full ">
+    <div className=" fixed bottom-0 left-0 w-screen  ">
       <Form onSubmit={save} buttonText="SEND" />
     </div>
   );

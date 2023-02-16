@@ -21,7 +21,7 @@ export default function Form({ onSubmit, buttonText = "Reply" }) {
   return (
     <form
       onSubmit={onFormSubmmit}
-      className="flex flex-col md:flex-row md:gap-[50px] gap-[30px] justify-between items-start px-[14px] py-[15px] max-w-[800px] w-full bg-white rounded-[12px] mt-1.5"
+      className="flex flex-col md:flex-row md:gap-[50px] gap-[30px] justify-between items-start px-[14px] py-[15px]  w-full bg-white rounded-[12px] mt-1.5"
     >
       <div className=" order-last md:order-first flex justify-between items-center max-md:w-full">
         <img src={image.png} alt="" className="max-md:w-[50px] md:w-[64px] " />
