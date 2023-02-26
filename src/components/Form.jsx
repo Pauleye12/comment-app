@@ -1,5 +1,6 @@
 import { useState } from "react";
 import data from "../../public/data.json";
+import { motion } from "framer-motion";
 
 export default function Form({ onSubmit, buttonText = "Reply" }) {
   const [inputText, setInputText] = useState("");
@@ -18,10 +19,48 @@ export default function Form({ onSubmit, buttonText = "Reply" }) {
     currentUser: { image },
   } = data;
 
+  // const formVariant = {
+  //   hidden: {
+  //     opacity: 0,
+  //     y: -50,
+  //   },
+  //   visible: {
+  //     opacity: 1,
+  //     y: 0,
+  //     transition: {
+  //       duration: .5,
+  //       ease: "easeInOut",
+  //     },
+  //   },
+  //   exit: {
+  //     opacity: 0,
+  //     y: "-100vh",
+  //     transition: {
+  //       duration: 1,
+  //       ease: "easeInOut",
+  //     },
+  //   },
+  // };
+  
+  const btnVariant = {
+    hidden: {
+      background: "#5357b8",
+      scale: 1
+    },
+    hover: {
+      scale: 1.2,
+      background: "#3a3d87",
+      transition: {
+        duration: 0.4,
+        ease: "easeInOut",
+        yoyo: Infinity,
+      },
+    },
+  };
   return (
-    <form
+    <motion.form
       onSubmit={onFormSubmmit}
-      className="flex flex-col md:flex-row md:gap-[50px] gap-[30px] justify-between items-start px-[14px] py-[15px]  w-full bg-white rounded-[12px] mt-1.5"
+      className="flex flex-col md:flex-row md:gap-[50px] gap-[30px] justify-between items-start px-[14px] py-[15px]  w-full bg-white rounded-[12px] mt-1.5" 
     >
       <div className=" order-last md:order-first flex justify-between items-center max-md:w-full">
         <img src={image.png} alt="" className="max-md:w-[50px] md:w-[64px] " />
@@ -40,12 +79,12 @@ export default function Form({ onSubmit, buttonText = "Reply" }) {
         id=""
         rows="3"
       ></textarea>
-      <button
-        className="bg-[#5357b8] text-white p-[10px] px-[16px] rounded-lg hover:opacity-[0.5] transition-all ease-in-out duration-[.45s] hidden md:block "
-        type="submit"
+      <motion.button
+        className="bg-[#5357b8] text-white p-[10px] px-[16px] rounded-lg hidden md:block "
+        type="submit" variants={btnVariant} initial='hidden' whileHover='hover'
       >
         {buttonText}
-      </button>
-    </form>
+      </motion.button>
+    </motion.form>
   );
 }

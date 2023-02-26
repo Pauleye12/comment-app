@@ -21,8 +21,10 @@ function CurrentUser(props) {
   };
 
   return (
-    <div className=" fixed bottom-0 left-0 w-screen  ">
-      <Form onSubmit={save} buttonText="SEND" />
+    <div className=" fixed bottom-0 left-0 w-screen  flex justify-center items-center ">
+      <div className="max-w-[900px] w-full">
+        <Form onSubmit={save} buttonText="SEND" />
+      </div>
     </div>
   );
 }

@@ -2,10 +2,70 @@ import React from "react";
 import { useCallback } from "react";
 import { useState } from "react";
 import data from "../../public/data.json";
-import Form from "../components/Form";
+import Form from "./Form";
 import CommentVote from "./CommentVote";
 import Delete from "./delete";
 import NestedComment from "./NestedComment";
+import { motion } from "framer-motion";
+
+const buttonVariant = {
+  visible: {},
+  hover: {
+    opacity: 0.7,
+    scale: 1.4,
+    transition: {
+      duration: 0.3,
+      ease: "easeInOut",
+      yoyo: Infinity,
+    },
+  },
+};
+
+const commentBoxVariant = {
+  hidden: {
+    opacity: 0,
+    y: -50,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: "easeInOut",
+    },
+  },
+  exit: {
+    opacity: 0,
+    y: -50,
+    transition: {
+      duration: 1,
+      ease: "easeInOut",
+    },
+  },
+};
+
+const formVariant = {
+  hidden: {
+    opacity: 0,
+    y: -50,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: "easeInOut",
+    },
+  },
+  exit: {
+    opacity: 0,
+    y: -50,
+    transition: {
+      duration: 1,
+      ease: "easeInOut",
+    },
+  },
+};
 
 function CommentBox({ values, update, voteComment, deleteComment }) {
   const [isCommenting, setIsCommenting] = useState(false);
@@ -69,7 +129,13 @@ function CommentBox({ values, update, voteComment, deleteComment }) {
 
   return (
     <div className="w-full ">
-      <div className="flex flex-col md:flex-row md:gap-[30px] gap-[4px] justify-start items-start px-[14px] py-[15px]  w-full bg-white rounded-[12px] ">
+      <motion.div
+        className="flex flex-col md:flex-row md:gap-[30px] gap-[4px] justify-start items-start px-[14px] py-[15px]  w-full bg-white rounded-[12px] "
+        variants={commentBoxVariant}
+        initial="hidden"
+        animate="visible"
+        exit="exit"
+      >
         {/* voting component for first level comment */}
         <div className="order-last md:order-first flex justify-between items-center max-md:w-full ">
           <CommentVote
@@ -81,9 +147,12 @@ function CommentBox({ values, update, voteComment, deleteComment }) {
             {values.user.username === "juliusomo" && (
               <Delete id={values.id} deleteComment={deleteComment} />
             )}
-            <button
-              className="flex justify-center items-center gap-[7px] text-[#5357b8] font-bold hover:opacity-[0.5] transition-all ease-in-out duration-[.45s] "
+            <motion.button
+              className="flex justify-center items-center gap-[7px] text-[#5357b8] font-bold "
               onClick={() => setIsCommenting((prev) => !prev)}
+              variants={buttonVariant}
+              animate="visible"
+              whileHover="hover"
             >
               <svg width="14" height="13" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -92,7 +161,7 @@ function CommentBox({ values, update, voteComment, deleteComment }) {
                 />
               </svg>
               Reply
-            </button>
+            </motion.button>
           </div>
         </div>
         <div className=" order-first md:order-last max-w-[670px] w-full  p-[10px]">
@@ -110,9 +179,12 @@ function CommentBox({ values, update, voteComment, deleteComment }) {
               {values.user.username === "juliusomo" && (
                 <Delete id={values.id} deleteComment={deleteComment} />
               )}
-              <button
-                className="flex justify-center items-center gap-[7px] text-[#5357b8] font-bold hover:opacity-[0.5] transition-all ease-in-out duration-[.45s] "
+              <motion.button
+                className="flex justify-center items-center gap-[7px] text-[#5357b8] font-bold "
                 onClick={() => setIsCommenting((prev) => !prev)}
+                variants={buttonVariant}
+                animate="visible"
+                whileHover="hover"
               >
                 <svg width="14" height="13" xmlns="http://www.w3.org/2000/svg">
                   <path
@@ -121,14 +193,23 @@ function CommentBox({ values, update, voteComment, deleteComment }) {
                   />
                 </svg>
                 Reply
-              </button>
+              </motion.button>
             </div>
           </div>
           <p className=" mt-[10px]">{values.content}</p>
         </div>
-      </div>
-      {isCommenting && <Form onSubmit={onReply} />}
+      </motion.div>
 
+      {isCommenting && (
+        <motion.div
+          variants={formVariant}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+        >
+          <Form onSubmit={onReply} />
+        </motion.div>
+      )}
       {/* Replies of first level comment */}
       {values.replies.length !== 0 && (
         <div className="border-l-[3px] border-Light-gray md:ml-[100px] md:pl-[50px] pl-[20px] my-[20px] flex flex-col justify-center items-center gap-[20px] ">

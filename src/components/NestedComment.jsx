@@ -3,6 +3,66 @@ import CommentVote from "./CommentVote";
 import Form from "./Form";
 import data from "../../public/data.json";
 import Delete from "./delete";
+import { motion } from "framer-motion";
+
+const buttonVariant = {
+  visible: {},
+  hover: {
+    scale: 1.4,
+    opacity: 0.7,
+    transition: {
+      duration: 0.3,
+      yoyo: Infinity,
+      ease: "easeInOut",
+    },
+  },
+};
+
+const replyBoxVariant = {
+  hidden: {
+    opacity: 0,
+    y: -50,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: "easeInOut",
+    },
+  },
+  exit: {
+    opacity: 0,
+    y: -50,
+    transition: {
+      duration: 1,
+      ease: "easeInOut",
+    },
+  },
+};
+
+const formVariant = {
+  hidden: {
+    opacity: 0,
+    y: -50,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: "easeInOut",
+    },
+  },
+  exit: {
+    opacity: 0,
+    y: -50,
+    transition: {
+      duration: 1,
+      ease: "easeInOut",
+    },
+  },
+};
 
 function NestedComment({ e, parentId, voteComment, update, deleteComment }) {
   const [isCommenting, setIsCommenting] = useState(false);
@@ -31,7 +91,13 @@ function NestedComment({ e, parentId, voteComment, update, deleteComment }) {
 
   return (
     <div className="w-full">
-      <div className="flex flex-col md:flex-row md:gap-[30px] gap-[4px] justify-start items-start px-[14px] py-[15px] max-w-[800px] w-full bg-white rounded-[8px] ">
+      <motion.div
+        className="flex flex-col md:flex-row md:gap-[30px] gap-[4px] justify-start items-start px-[14px] py-[15px] max-w-[800px] w-full bg-white rounded-[8px] "
+        variants={replyBoxVariant}
+        initial="hidden"
+        animate="visible"
+        exit="exit"
+      >
         <div className="order-last md:order-first flex justify-between items-center max-md:w-full ">
           <CommentVote
             id={parentId}
@@ -47,9 +113,12 @@ function NestedComment({ e, parentId, voteComment, update, deleteComment }) {
                 nestedCommentId={e.id}
               />
             )}
-            <button
-              className="flex justify-center items-center gap-[7px] text-[#5357b8] font-bold hover:opacity-[0.5] transition-all ease-in-out duration-[.45s] "
+            <motion.button
+              className="flex justify-center items-center gap-[7px] text-[#5357b8] font-bold "
               onClick={() => setIsCommenting((prev) => !prev)}
+              variants={buttonVariant}
+              animate="visible"
+              whileHover="hover"
             >
               <svg width="14" height="13" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -58,7 +127,7 @@ function NestedComment({ e, parentId, voteComment, update, deleteComment }) {
                 />
               </svg>
               Reply
-            </button>
+            </motion.button>
           </div>
         </div>
         <div className=" order-first md:order-last  max-w-[500px] p-[10px] flex-grow">
@@ -78,9 +147,12 @@ function NestedComment({ e, parentId, voteComment, update, deleteComment }) {
                   nestedCommentId={e.id}
                 />
               )}
-              <button
-                className="flex justify-center items-center gap-[7px] text-[#5357b8] font-bold hover:opacity-[0.5] transition-all ease-in-out duration-[.45s] "
+              <motion.button
+                className="flex justify-center items-center gap-[7px] text-[#5357b8] font-bold "
                 onClick={() => setIsCommenting((prev) => !prev)}
+                variants={buttonVariant}
+                animate="visible"
+                whileHover="hover"
               >
                 <svg width="14" height="13" xmlns="http://www.w3.org/2000/svg">
                   <path
@@ -89,15 +161,24 @@ function NestedComment({ e, parentId, voteComment, update, deleteComment }) {
                   />
                 </svg>
                 Reply
-              </button>
+              </motion.button>
             </div>
           </div>
           <p className=" mt-[10px]">{e.content}</p>
         </div>
-      </div>
-      <div className="mt-1.5">
-        {isCommenting && <Form onSubmit={onSubmit} />}
-      </div>
+      </motion.div>
+
+      {isCommenting && (
+        <motion.div
+          className="mt-1.5"
+          variants={formVariant}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+        >
+          <Form onSubmit={onSubmit} />
+        </motion.div>
+      )}
     </div>
   );
 }
