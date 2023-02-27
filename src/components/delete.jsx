@@ -4,11 +4,19 @@ import { motion } from 'framer-motion';
 function Delete({ id, deleteComment, nestedCommentId }) {
 
   const buttonVariant = {
+    visible: {
+      scale: 1,
+      opacity:1,
+      transition: {
+        duration: 0.2,
+        ease: "easeInOut",
+      },
+    },
     hover: {
       scale: 1.2,
-      opacity: .7,
+      opacity: 0.7,
       transition: {
-        yoyo: Infinity,
+       duration: .4,
         ease: "easeInOut",
       },
     },
@@ -18,6 +26,8 @@ function Delete({ id, deleteComment, nestedCommentId }) {
       onClick={deleteComment(id, nestedCommentId)}
       className="flex justify-center items-center gap-[7px] text-[#e9646d] font-bold "
       variants={buttonVariant}
+      animate="visible"
+      whileTap="visible"
       whileHover="hover"
     >
       <svg width="12" height="14" xmlns="http://www.w3.org/2000/svg">

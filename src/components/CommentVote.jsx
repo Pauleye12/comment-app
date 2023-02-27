@@ -3,21 +3,28 @@ import { motion } from "framer-motion";
 
 function CommentVote({ id, score, voteComment, nestedCommentId }) {
   const buttonVariant = {
+    visible: {
+      scale: 1,
+      transition: {
+        ease: "easeInOut",
+      },
+    },
     hover: {
       scale: 2,
       transition: {
-        delay: 0,
-        ease: 'easeIn'
+        ease: "easeIn",
       },
     },
   };
 
   return (
-    <div className="  flex md:flex-col justify-center items-center gap-[15px] p-[10px] bg-Very-light-gray rounded-[10px] md:translate-y-[17px] ">
+    <motion.div className="  flex md:flex-col justify-center items-center gap-[15px] p-[10px] bg-Very-light-gray rounded-[10px] md:translate-y-[17px] ">
       <motion.button
         className="hover: text-[#5357b8] transition-all ease-in-out duration-[.45s] flex justify-center items-center "
         onClick={voteComment(id, "inc", nestedCommentId)}
         variants={buttonVariant}
+        animate="visible"
+        whileTap="visible"
         whileHover="hover"
       >
         <svg width="11" height="11" xmlns="http://www.w3.org/2000/svg">
@@ -32,6 +39,8 @@ function CommentVote({ id, score, voteComment, nestedCommentId }) {
         className="hover: text-[#5357b8] transition-all ease-in-out duration-[.45s] flex justify-center items-center "
         onClick={voteComment(id, "dec", nestedCommentId)}
         variants={buttonVariant}
+        animate="visible"
+        whileTap="visible"
         whileHover="hover"
       >
         <svg
@@ -46,7 +55,7 @@ function CommentVote({ id, score, voteComment, nestedCommentId }) {
           />
         </svg>
       </motion.button>
-    </div>
+    </motion.div>
   );
 }
 

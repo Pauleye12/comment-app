@@ -14,7 +14,7 @@ function App() {
       transition: {
         duration: .55,
         delay: .2,
-        ease: 'easeIn'
+        ease: 'easeIn',
       }
     }
 }

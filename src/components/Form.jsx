@@ -45,7 +45,14 @@ export default function Form({ onSubmit, buttonText = "Reply" }) {
   const btnVariant = {
     hidden: {
       background: "#5357b8",
-      scale: 1
+    },
+    visible: {
+      scale: 1,
+      background: "#5357b8",
+      transition: {
+        duration: 0.2,
+        ease: "easeInOut",
+      },
     },
     hover: {
       scale: 1.2,
@@ -53,7 +60,6 @@ export default function Form({ onSubmit, buttonText = "Reply" }) {
       transition: {
         duration: 0.4,
         ease: "easeInOut",
-        yoyo: Infinity,
       },
     },
   };
@@ -81,7 +87,8 @@ export default function Form({ onSubmit, buttonText = "Reply" }) {
       ></textarea>
       <motion.button
         className="bg-[#5357b8] text-white p-[10px] px-[16px] rounded-lg hidden md:block "
-        type="submit" variants={btnVariant} initial='hidden' whileHover='hover'
+        type="submit" variants={btnVariant} initial='hidden' whileHover='hover' animate='visible'
+        whileTap='visible'
       >
         {buttonText}
       </motion.button>

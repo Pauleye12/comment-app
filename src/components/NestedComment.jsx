@@ -6,13 +6,19 @@ import Delete from "./delete";
 import { motion } from "framer-motion";
 
 const buttonVariant = {
-  visible: {},
+  visible: {
+    scale: 1,
+    opacity:1,
+    transition: {
+      duration: 0.2,
+      ease: "easeInOut",
+    },
+  },
   hover: {
     scale: 1.4,
     opacity: 0.7,
     transition: {
       duration: 0.3,
-      yoyo: Infinity,
       ease: "easeInOut",
     },
   },
@@ -118,6 +124,7 @@ function NestedComment({ e, parentId, voteComment, update, deleteComment }) {
               onClick={() => setIsCommenting((prev) => !prev)}
               variants={buttonVariant}
               animate="visible"
+              whileTap="visible"
               whileHover="hover"
             >
               <svg width="14" height="13" xmlns="http://www.w3.org/2000/svg">
@@ -152,6 +159,7 @@ function NestedComment({ e, parentId, voteComment, update, deleteComment }) {
                 onClick={() => setIsCommenting((prev) => !prev)}
                 variants={buttonVariant}
                 animate="visible"
+                whileTap="visible"
                 whileHover="hover"
               >
                 <svg width="14" height="13" xmlns="http://www.w3.org/2000/svg">
