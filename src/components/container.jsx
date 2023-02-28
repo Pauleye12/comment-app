@@ -5,6 +5,8 @@ import data from "../../public/data.json";
 import CurrentUser from "./CurrentUser";
 import { useCallback } from "react";
 import { useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+
 function Container() {
   //setting the state from the local storage or from the data.comment if local storage is empty.
   const [info, setInfo] = useState(() => {
@@ -123,20 +125,41 @@ function Container() {
       // const updatedComments = info.filter((comment) => comment.id !== id);
       // return updatedComments
     };
-
+  
+   const containerVariant = {
+     hidden: {
+       opacity: 0,
+     },
+     visible: {
+       opacity: 1,
+       transition: {
+         duration: 0.55,
+         delay: 0.2,
+         ease: "easeIn",
+       },
+     },
+   };
+  
   return (
-    <div className="flex flex-col justify-center items-start gap-[20px] w-full max-w-[800px] mb-[200px] md:mb-[130px] ">
-      {info.map((comment, index) => (
-        <CommentBox
-          key={index}
-          values={comment}
-          update={setInfo}
-          voteComment={voteComment}
-          deleteComment={deleteComment}
-        />
-      ))}
+    <motion.div
+      className="flex flex-col justify-center items-start gap-[20px] w-full max-w-[800px] mb-[200px] md:mb-[130px] "
+      variants={containerVariant}
+      initial="hidden"
+      animate="visible"
+    >
+      <AnimatePresence>
+        {info.map((comment, index) => (
+          <CommentBox
+            key={index}
+            values={comment}
+            update={setInfo}
+            voteComment={voteComment}
+            deleteComment={deleteComment}
+          />
+        ))}
+      </AnimatePresence>
       <CurrentUser update={setInfo} />
-    </div>
+    </motion.div>
   );
 }
 

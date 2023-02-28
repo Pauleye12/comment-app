@@ -7,7 +7,8 @@ function App() {
  
   const containerVariant = {
     hidden: {
-      opacity: 0
+      opacity: 0,
+      
     },
     visible: {
       opacity: 1,
@@ -22,9 +23,7 @@ function App() {
   return (
     <motion.div
       className=" flex justify-center items-center text-[black] pt-[60px] bg-Very-light-gray p-[20px] "
-      variants={containerVariant}
-      initial="hidden"
-      animate="visible"
+      
     >
       <Container />
     </motion.div>

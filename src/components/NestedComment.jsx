@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 const buttonVariant = {
   visible: {
     scale: 1,
-    opacity:1,
+    opacity: 1,
     transition: {
       duration: 0.2,
       ease: "easeInOut",
@@ -39,10 +39,17 @@ const replyBoxVariant = {
   },
   exit: {
     opacity: 0,
-    y: -50,
+    scale: [1, 1.2, 0],
     transition: {
-      duration: 1,
-      ease: "easeInOut",
+      scale: {
+        duration: 0.5,
+        ease: "easeInOut",
+      },
+      opacity: {
+        delay: 0.15,
+        duration: 0.35,
+        ease: "easeInOut",
+      },
     },
   },
 };
@@ -96,14 +103,14 @@ function NestedComment({ e, parentId, voteComment, update, deleteComment }) {
   }
 
   return (
-    <div className="w-full">
-      <motion.div
-        className="flex flex-col md:flex-row md:gap-[30px] gap-[4px] justify-start items-start px-[14px] py-[15px] max-w-[800px] w-full bg-white rounded-[8px] "
-        variants={replyBoxVariant}
-        initial="hidden"
-        animate="visible"
-        exit="exit"
-      >
+    <motion.div
+      className="w-full"
+      variants={replyBoxVariant}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+    >
+      <motion.div className="flex flex-col md:flex-row md:gap-[30px] gap-[4px] justify-start items-start px-[14px] py-[15px] max-w-[800px] w-full bg-white rounded-[8px] ">
         <div className="order-last md:order-first flex justify-between items-center max-md:w-full ">
           <CommentVote
             id={parentId}
@@ -187,7 +194,7 @@ function NestedComment({ e, parentId, voteComment, update, deleteComment }) {
           <Form onSubmit={onSubmit} />
         </motion.div>
       )}
-    </div>
+    </motion.div>
   );
 }
 
