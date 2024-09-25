@@ -80,13 +80,25 @@ const formVariant = {
 function NestedComment({ e, parentId, voteComment, update, deleteComment }) {
   const [isCommenting, setIsCommenting] = useState(false);
 
+  const CreatedAtDate = () => {
+    const dateFormatter = new Intl.DateTimeFormat("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+    });
+
+    return dateFormatter.format(new Date());
+  };
+
   function onSubmit(reply) {
     const replyPayload = {
       id: Date.now(),
       score: 0,
       content: reply,
       user: data.currentUser,
-      createdAt: "2 weeks",
+      createdAt: CreatedAtDate(),
     };
 
     update((prev) => {

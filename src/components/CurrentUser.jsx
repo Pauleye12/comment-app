@@ -12,6 +12,8 @@ function CurrentUser(props) {
       year: "numeric",
       month: "short",
       day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
     });
 
     return dateFormatter.format(new Date());

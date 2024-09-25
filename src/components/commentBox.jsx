@@ -29,11 +29,11 @@ const buttonVariant = {
 const commentBoxVariant = {
   hidden: {
     opacity: 0,
-    scale:0
+    scale: 0,
   },
   visible: {
     opacity: 1,
-    scale:1,
+    scale: 1,
     y: 0,
     transition: {
       duration: 0.5,
@@ -95,13 +95,24 @@ function CommentBox({ values, update, voteComment, deleteComment }) {
   //   );
   // };
 
+  const CreatedAtDate = () => {
+    const dateFormatter = new Intl.DateTimeFormat("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+    });
+
+    return dateFormatter.format(new Date());
+  };
   const onReply = useCallback((reply) => {
     const replyPayload = {
       id: Date.now(),
       score: 0,
       content: reply,
       user: data.currentUser,
-      createdAt: "2 weeks",
+      createdAt: CreatedAtDate(),
     };
 
     update((prev) => {
