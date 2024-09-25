@@ -7,11 +7,21 @@ function CurrentUser(props) {
   const [user, setUser] = useState(data.currentUser);
   const textEdit = (e) => setText(e.target.value);
 
+  const CreatedAtDate = () => {
+    const dateFormatter = new Intl.DateTimeFormat("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    });
+
+    return dateFormatter.format(new Date());
+  };
+
   const save = (comment) => {
     const newobj = {
       id: Date.now(),
       content: comment,
-      createdAt: "2 days ago",
+      createdAt: CreatedAtDate(),
       score: 0,
       user: user,
       replies: [],

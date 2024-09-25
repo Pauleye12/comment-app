@@ -5,14 +5,13 @@ import { motion } from "framer-motion";
 export default function Form({ onSubmit, buttonText = "Reply" }) {
   const [inputText, setInputText] = useState("");
 
-
   //Destructured e.target.value
   const onChange = ({ target: { value } }) => setInputText(value);
 
   const onFormSubmmit = (e) => {
     e.preventDefault();
     onSubmit(inputText);
-    setInputText('')
+    setInputText("");
   };
 
   const {
@@ -41,7 +40,7 @@ export default function Form({ onSubmit, buttonText = "Reply" }) {
   //     },
   //   },
   // };
-  
+
   const btnVariant = {
     hidden: {
       background: "#5357b8",
@@ -66,7 +65,7 @@ export default function Form({ onSubmit, buttonText = "Reply" }) {
   return (
     <motion.form
       onSubmit={onFormSubmmit}
-      className="flex flex-col md:flex-row md:gap-[50px] gap-[30px] justify-between items-start px-[14px] py-[15px]  w-full bg-white rounded-[12px] mt-1.5" 
+      className="flex flex-col md:flex-row md:gap-[50px] gap-[30px] justify-between items-start px-[14px] py-[15px]  w-full bg-white rounded-[12px] mt-1.5"
     >
       <div className=" order-last md:order-first flex justify-between items-center max-md:w-full">
         <img src={image.png} alt="" className="max-md:w-[50px] md:w-[64px] " />
@@ -78,17 +77,21 @@ export default function Form({ onSubmit, buttonText = "Reply" }) {
         </button>
       </div>
       <textarea
-        className="border-[2px] border-Light-gray flex-grow w-full"
+        className="border-[2px] border-Light-gray outline-none px-4 py-3 flex-grow w-full"
         onChange={onChange}
         value={inputText}
         name=""
         id=""
-        rows="3"
+        rows="2"
       ></textarea>
       <motion.button
         className="bg-[#5357b8] text-white p-[10px] px-[16px] rounded-lg hidden md:block "
-        type="submit" variants={btnVariant} initial='hidden' whileHover='hover' animate='visible'
-        whileTap='visible'
+        type="submit"
+        variants={btnVariant}
+        initial="hidden"
+        whileHover="hover"
+        animate="visible"
+        whileTap="visible"
       >
         {buttonText}
       </motion.button>
